@@ -48,18 +48,18 @@
     /* ── HEADER ── */
     header {
       background: var(--ink);
-      padding: 12px 20px;
+      padding: 10px 16px;
       text-align: center;
       position: sticky; top: 0; z-index: 100;
     }
-    header p { color: var(--gold-lt); font-size: 13px; font-weight: 700; }
-    header span { color: rgba(255,255,255,.5); margin: 0 8px; }
+    header p { color: var(--gold-lt); font-size: 12px; font-weight: 700; line-height: 1.5; }
+    header span { color: rgba(255,255,255,.4); margin: 0 6px; }
 
     /* ── HERO SLIDER ── */
     .hero-wrapper { background: var(--ink); }
     .hero-main {
       position: relative; width: 100%; aspect-ratio: 1/1;
-      overflow: hidden; background: var(--ink);
+      overflow: hidden; background: var(--ink); max-height: 400px;
     }
     .hero-main img {
       width: 100%; height: 100%;
@@ -67,13 +67,13 @@
       transition: opacity .35s ease;
     }
     .hero-thumbs {
-      display: flex; gap: 8px; padding: 10px 14px;
+      display: flex; gap: 8px; padding: 8px 12px;
       overflow-x: auto; scrollbar-width: none;
     }
     .hero-thumbs::-webkit-scrollbar { display: none; }
     .hero-thumb {
-      flex-shrink: 0; width: 60px; height: 60px;
-      border-radius: 10px; overflow: hidden;
+      flex-shrink: 0; width: 52px; height: 52px;
+      border-radius: 8px; overflow: hidden;
       border: 2px solid transparent; cursor: pointer;
       opacity: .55; transition: opacity .25s, border-color .25s;
       background: none; padding: 0;
@@ -81,86 +81,162 @@
     .hero-thumb.active { border-color: var(--gold-lt); opacity: 1; }
     .hero-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
 
-    .wrap { max-width: 520px; margin: 0 auto; padding: 0 16px; }
+    .wrap { max-width: 480px; margin: 0 auto; padding: 0 14px; }
 
     /* ── PRODUCT INFO ── */
-    .product-info { padding: 24px 0 0; }
-    .eyebrow { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
-    .product-title { font-size: clamp(2rem, 8vw, 2.8rem); color: var(--ink); margin-bottom: 12px; }
-    .stars-row {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 16px; flex-direction: row-reverse; justify-content: flex-end;
-    }
-    .stars { color: var(--gold); font-size: 15px; direction: ltr; }
-    .rating-text { font-size: 13px; color: var(--ink-mid); font-weight: 600; }
+    .product-info { padding: 20px 0 0; }
+    .eyebrow { font-size: 11px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+    .product-title { font-size: clamp(1.7rem, 7vw, 2.6rem); color: var(--ink); margin-bottom: 10px; }
 
     .trust-pills {
-      display: flex; gap: 8px; flex-wrap: wrap;
-      margin-bottom: 20px; justify-content: center; align-items: center;
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-bottom: 16px; justify-content: center; align-items: center;
     }
     .trust-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 14px; background: var(--tint);
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; background: var(--tint);
       border: 1px solid var(--border); border-radius: 99px;
-      font-size: 12px; font-weight: 700; color: var(--gold-dk);
+      font-size: 11px; font-weight: 700; color: var(--gold-dk);
     }
 
-    .divider { height: 1px; background: var(--border); margin: 20px 0; }
-    .section-title { font-size: 13px; font-weight: 800; color: var(--ink-mid); margin-bottom: 14px; text-align: right; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .section-title { font-size: 12px; font-weight: 800; color: var(--ink-mid); margin-bottom: 12px; text-align: right; }
 
-    /* ── PACK CARDS ── */
-    .pack-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    /* ══════════════════════════════════════
+       PACK CARDS — REDESIGNED FOR MOBILE
+    ══════════════════════════════════════ */
+    .pack-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+
     .pack-card {
-      position: relative; border: 2px solid var(--border);
-      border-radius: var(--r); padding: 16px 52px 16px 16px;
-      background: var(--white); cursor: pointer;
-      transition: all .25s; user-select: none; text-align: right;
+      position: relative;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      background: var(--white);
+      cursor: pointer;
+      transition: all .25s;
+      user-select: none;
+      overflow: hidden;
     }
-    .pack-card:hover { border-color: var(--gold-lt); background: var(--pale); }
+    .pack-card:hover { border-color: var(--gold-lt); }
     .pack-card.selected { border-color: var(--gold); background: var(--tint); box-shadow: 0 0 0 1px var(--gold); }
+
+    /* Radio circle — top-left in LTR = top-right in RTL */
     .pack-radio {
-      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
-      width: 20px; height: 20px; border-radius: 50%;
-      border: 2px solid var(--gold); background: var(--white);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all .2s;
+      
     }
     .pack-card.selected .pack-radio { background: var(--gold); border-color: var(--gold); }
     .pack-radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--white); display: none; }
     .pack-card.selected .pack-radio::after { display: block; }
+
+    /* Badge — top right */
     .pack-badge {
-      position: absolute; top: -10px; left: 14px;
+      position: absolute; top: 0; right: 0;
       background: var(--ink); color: var(--gold-lt);
-      font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 99px;
+      font-size: 10px; font-weight: 800;
+      padding: 4px 12px 4px 14px;
+      border-radius: 0 14px 0 14px;
+      z-index: 2;
     }
-    .pack-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-direction: row-reverse; }
-    .pack-name { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.3; }
-    .pack-sub  { font-size: 12px; color: var(--ink-lt); margin-top: 2px; }
-    .pack-price { text-align: left; flex-shrink: 0; }
-    .pack-price-now { font-size: 17px; font-weight: 800; color: var(--ink); display: block; }
-    .pack-price-old { font-size: 12px; color: var(--ink-lt); text-decoration: line-through; }
+
+    /* ── PACK INNER LAYOUT ── */
+    .pack-inner {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 0;
+      min-height: 100px;
+    }
+
+    /* LEFT: image block */
+    .pack-img-col {
+      position: relative;
+      background: var(--pale);
+      border-left: 1px solid var(--border); /* RTL: border on left = divider on right side of image */
+      display: flex; align-items: center; justify-content: center;
+      padding: 12px 8px;
+    }
+    .pack-img-col img {
+      width: 72px; height: 72px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      display: block;
+    }
+    .pack-img-placeholder {
+      width: 72px; height: 72px;
+      border-radius: 10px;
+      border: 1.5px dashed var(--gold-lt);
+      background: rgba(196,146,42,.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+
+    /* RIGHT: text + price block */
+    .pack-text-col {
+      padding: 14px 42px 12px 14px; /* right padding = space for radio */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      text-align: right;
+    }
+    /* when badge exists, push top padding up */
+    .pack-card .pack-text-col { padding-top: 28px; }
+    .pack-card:not([data-badge]) .pack-text-col,
+    .pack-card[data-badge="false"] .pack-text-col { padding-top: 14px; }
+
+    .pack-name {
+      font-size: 15px; font-weight: 800;
+      color: var(--ink); line-height: 1.25;
+    }
+    .pack-type-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(196,146,42,.12);
+      border: 1px solid rgba(196,146,42,.25);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 11px; font-weight: 700; color: var(--gold-dk);
+      align-self: flex-end;
+      width: fit-content;
+    }
+    .pack-sub { font-size: 11px; color: var(--ink-lt); line-height: 1.4; }
+
+    .pack-price-row {
+      display: flex; align-items: center; gap: 6px;
+      justify-content: flex-end; flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .pack-price-now { font-size: 18px; font-weight: 900; color: var(--ink); }
+    .pack-price-old { font-size: 11px; color: var(--ink-lt); text-decoration: line-through; }
     .pack-price-save {
-      font-size: 11px; font-weight: 800; color: var(--gold-dk);
+      font-size: 10px; font-weight: 800; color: var(--gold-dk);
       background: rgba(196,146,42,.12); padding: 2px 6px;
-      border-radius: 4px; margin-top: 2px; display: inline-block;
+      border-radius: 4px;
     }
-    .pack-dots { display: flex; gap: 4px; margin-top: 10px; flex-wrap: wrap; justify-content: flex-end; }
+
+    /* dots row */
+    .pack-dots-row {
+      padding: 8px 14px 10px;
+      border-top: 1px dashed var(--border);
+      display: flex; gap: 5px; flex-wrap: wrap;
+      justify-content: flex-end; align-items: center;
+    }
+    .pack-dots-label { font-size: 10px; color: var(--ink-lt); font-weight: 600; margin-left: auto; }
     .pack-dot {
-      width: 22px; height: 22px; border-radius: 50%;
+      width: 20px; height: 20px; border-radius: 50%;
       border: 1.5px dashed var(--gold-lt);
       background: rgba(196,146,42,.06);
       display: flex; align-items: center; justify-content: center;
     }
 
     /* ── PICKER ── */
-    .picker-section { margin-bottom: 28px; }
+    .picker-section { margin-bottom: 24px; }
     .selection-progress {
       background: var(--pale); border: 1px solid var(--border);
-      border-radius: 12px; padding: 10px 14px; margin-bottom: 16px;
+      border-radius: 12px; padding: 10px 14px; margin-bottom: 14px;
       display: flex; align-items: center; justify-content: space-between;
       font-size: 12px; color: var(--ink-mid); flex-direction: row-reverse;
     }
-    .progress-bar-wrap { flex: 1; margin: 0 12px; height: 5px; background: rgba(196,146,42,.2); border-radius: 99px; overflow: hidden; }
+    .progress-bar-wrap { flex: 1; margin: 0 10px; height: 5px; background: rgba(196,146,42,.2); border-radius: 99px; overflow: hidden; }
     .progress-bar-fill { height: 100%; background: var(--grad); border-radius: 99px; transition: width .4s ease; }
 
     /* ── SLOTS ── */
@@ -171,72 +247,56 @@
       border-radius: var(--r); background: var(--pale);
       overflow: hidden; transition: border-color .25s, background .25s, box-shadow .25s;
     }
-    /* DONE state — green border & background */
     .picker-slot.filled {
-      border-style: solid;
-      border-color: var(--green);
-      background: var(--green-lt);
-      box-shadow: 0 0 0 1px var(--green-border);
+      border-style: solid; border-color: var(--green);
+      background: var(--green-lt); box-shadow: 0 0 0 1px var(--green-border);
     }
-    /* OPEN (active, selecting) — gold */
     .picker-slot.open {
-      border-style: solid;
-      border-color: var(--gold);
-      background: var(--white);
-      box-shadow: 0 0 0 1px rgba(196,146,42,.25);
+      border-style: solid; border-color: var(--gold);
+      background: var(--white); box-shadow: 0 0 0 1px rgba(196,146,42,.25);
     }
-    /* LOCKED — dimmed */
     .picker-slot.locked { opacity: .45; pointer-events: none; }
 
     .slot-header {
       display: flex; align-items: center; gap: 10px;
-      padding: 14px 16px; cursor: pointer; min-height: 68px;
+      padding: 12px 14px; cursor: pointer; min-height: 64px;
       flex-direction: row-reverse; user-select: none;
     }
-
-    /* Slot number circle */
     .slot-num {
-      width: 30px; height: 30px; border-radius: 50%;
+      width: 28px; height: 28px; border-radius: 50%;
       background: var(--gold-lt); color: var(--white);
-      font-size: 14px; font-weight: 800;
+      font-size: 13px; font-weight: 800;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; transition: background .25s;
     }
     .picker-slot.filled .slot-num { background: var(--green); }
-
-    /* Preview image */
     .slot-preview {
-      width: 48px; height: 48px; border-radius: 10px;
+      width: 44px; height: 44px; border-radius: 9px;
       object-fit: cover; flex-shrink: 0;
       border: 1.5px solid var(--green-border);
     }
-    /* Plus placeholder */
     .slot-plus-btn {
-      width: 48px; height: 48px; border-radius: 10px;
+      width: 44px; height: 44px; border-radius: 9px;
       border: 2px dashed var(--gold-lt);
       background: rgba(196,146,42,.07);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; transition: background .2s;
     }
     .slot-header:hover .slot-plus-btn { background: rgba(196,146,42,.15); }
-
     .slot-info { flex: 1; min-width: 0; text-align: right; }
-    .slot-name { font-size: 14px; font-weight: 700; color: var(--ink); }
-    .slot-sub  { font-size: 12px; color: var(--ink-lt); margin-top: 1px; }
-
+    .slot-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .slot-sub  { font-size: 11px; color: var(--ink-lt); margin-top: 1px; }
     .slot-badge {
       font-size: 10px; font-weight: 800;
-      padding: 3px 10px; border-radius: 99px;
+      padding: 3px 9px; border-radius: 99px;
       background: var(--tint); color: var(--gold-dk);
       border: 1px solid var(--border); flex-shrink: 0; white-space: nowrap;
       transition: background .25s, color .25s, border-color .25s;
     }
     .slot-badge.done { background: var(--green); color: #fff; border-color: var(--green); }
-
     .slot-chevron { flex-shrink: 0; color: var(--gold-lt); transition: transform .3s; }
     .picker-slot.open .slot-chevron { transform: rotate(180deg); }
 
-    /* Collapsible panel */
     .slot-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.25,1,.5,1); }
     .picker-slot.open .slot-panel { grid-template-rows: 1fr; }
     .slot-panel-inner { overflow: hidden; }
@@ -244,12 +304,12 @@
     /* ── PERFUME GRID ── */
     .perfume-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 10px; padding: 6px 14px 6px;
+      gap: 8px; padding: 6px 12px 6px;
     }
     .perfume-card {
-      border: 1.5px solid var(--border); border-radius: 14px;
+      border: 1.5px solid var(--border); border-radius: 12px;
       background: var(--white); cursor: pointer; overflow: hidden;
-      transition: all .2s; padding: 10px; text-align: center;
+      transition: all .2s; padding: 8px; text-align: center;
     }
     .perfume-card:hover { border-color: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(196,146,42,.15); }
     .perfume-card.selected {
@@ -258,42 +318,39 @@
     }
     .perfume-card img {
       width: 100%; aspect-ratio: 1/1; object-fit: cover;
-      border-radius: 8px; display: block; margin-bottom: 8px;
+      border-radius: 7px; display: block; margin-bottom: 6px;
     }
-    .perfume-card-name { font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.3; }
-    .perfume-card-vol  { font-size: 11px; color: var(--ink-lt); margin-top: 2px; }
+    .perfume-card-name { font-size: 11px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+    .perfume-card-vol  { font-size: 10px; color: var(--ink-lt); margin-top: 2px; }
     .perfume-check {
-      width: 20px; height: 20px; border-radius: 50%;
+      width: 18px; height: 18px; border-radius: 50%;
       background: var(--green);
       display: none; align-items: center; justify-content: center;
-      margin: 6px auto 0;
+      margin: 5px auto 0;
     }
     .perfume-card.selected .perfume-check { display: flex; }
-    .perfume-check svg { width: 11px; height: 11px; }
+    .perfume-check svg { width: 10px; height: 10px; }
 
-    /* ── CUSTOM PERFUME INPUT ── */
+    /* ── CUSTOM INPUT ── */
     .custom-perfume-wrap {
-      margin: 8px 14px 14px;
+      margin: 6px 12px 12px;
       background: var(--pale);
       border: 1.5px dashed var(--border);
-      border-radius: 14px; padding: 14px;
+      border-radius: 12px; padding: 12px;
       transition: border-color .25s, background .25s;
     }
-    /* Green when confirmed */
     .custom-perfume-wrap.confirmed {
-      border-style: solid;
-      border-color: var(--green);
-      background: var(--green-lt);
+      border-style: solid; border-color: var(--green); background: var(--green-lt);
     }
     .custom-perfume-label {
-      font-size: 12px; font-weight: 800; color: var(--gold-dk);
-      margin-bottom: 8px; text-align: right; display: block;
+      font-size: 11px; font-weight: 800; color: var(--gold-dk);
+      margin-bottom: 7px; text-align: right; display: block;
     }
     .custom-perfume-wrap.confirmed .custom-perfume-label { color: var(--green); }
-    .custom-perfume-row { display: flex; gap: 8px; flex-direction: row-reverse; }
+    .custom-perfume-row { display: flex; gap: 7px; flex-direction: row-reverse; }
     .custom-perfume-input {
       flex: 1; border: 1.5px solid rgba(196,146,42,.3);
-      border-radius: 10px; padding: 10px 12px;
+      border-radius: 9px; padding: 9px 11px;
       font-family: 'Cairo', sans-serif;
       font-size: 13px; font-weight: 500; color: var(--ink);
       background: var(--white); outline: none;
@@ -304,21 +361,19 @@
     .custom-perfume-input::placeholder { color: var(--ink-lt); }
     .custom-perfume-btn {
       background: var(--ink); color: var(--gold-lt);
-      border: none; border-radius: 10px; padding: 10px 16px;
-      font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800;
+      border: none; border-radius: 9px; padding: 9px 14px;
+      font-family: 'Cairo', sans-serif; font-size: 12px; font-weight: 800;
       cursor: pointer; white-space: nowrap; transition: opacity .2s;
     }
     .custom-perfume-btn:hover { opacity: .85; }
-    .custom-perfume-btn.confirmed-btn {
-      background: var(--green); color: #fff;
-    }
+    .custom-perfume-btn.confirmed-btn { background: var(--green); color: #fff; }
 
     /* ── NEXT BUTTON ── */
-    .slot-next-wrap { padding: 10px 14px 16px; display: flex; justify-content: flex-end; }
+    .slot-next-wrap { padding: 8px 12px 14px; display: flex; justify-content: flex-end; }
     .slot-next-btn {
       background: var(--grad); color: var(--white);
-      border: none; border-radius: 12px; padding: 11px 24px;
-      font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 800;
+      border: none; border-radius: 11px; padding: 10px 22px;
+      font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800;
       cursor: pointer; display: flex; align-items: center; gap: 8px;
       transition: opacity .2s, transform .15s;
       box-shadow: 0 4px 12px rgba(160,120,24,.25);
@@ -327,19 +382,19 @@
     .slot-next-btn:active { transform: scale(.97); }
     .slot-next-btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
 
-    /* ── STOCK & COUNTDOWN ── */
+    /* ── STOCK ── */
     .stock-bar {
       background: var(--tint); border: 1px dashed var(--gold);
       border-radius: 12px; padding: 10px 14px;
       display: flex; align-items: center; gap: 10px;
-      margin-bottom: 20px; flex-direction: row-reverse;
+      margin-bottom: 16px; flex-direction: row-reverse;
     }
     .ping-wrap { position: relative; width: 14px; height: 14px; flex-shrink: 0; }
     .ping-ring { position: absolute; inset: 0; border-radius: 50%; background: var(--gold); opacity: .4; animation: ping 1.5s ease infinite; }
     .ping-dot  { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-dk); margin: 3px; }
     @keyframes ping { 0%{transform:scale(1);opacity:.4} 75%,100%{transform:scale(2.2);opacity:0} }
-    .stock-text { flex: 1; font-size: 13px; font-weight: 800; color: var(--ink); text-align: right; }
-    .stock-track { width: 70px; height: 6px; background: rgba(196,146,42,.2); border-radius: 99px; overflow: hidden; flex-shrink: 0; }
+    .stock-text { flex: 1; font-size: 12px; font-weight: 800; color: var(--ink); text-align: right; }
+    .stock-track { width: 60px; height: 6px; background: rgba(196,146,42,.2); border-radius: 99px; overflow: hidden; flex-shrink: 0; }
     .stock-fill {
       width: 35%; height: 100%; border-radius: 99px;
       background-image: repeating-linear-gradient(45deg, var(--gold-lt) 0, var(--gold-lt) 3px, var(--gold-dk) 3px, var(--gold-dk) 6px);
@@ -351,53 +406,52 @@
       background: var(--pale); border: 1px dashed var(--border);
       border-radius: 12px; padding: 10px 14px;
       display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
-      font-size: 13px; color: var(--ink-mid); flex-direction: row-reverse;
+      font-size: 12px; color: var(--ink-mid); flex-direction: row-reverse;
     }
-    .countdown-bar strong { color: var(--gold-dk); font-size: 15px; direction: ltr; display: inline-block; }
+    .countdown-bar strong { color: var(--gold-dk); font-size: 14px; direction: ltr; display: inline-block; }
 
     /* ── FEATURES ── */
-    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 24px; }
     .feature-card {
       background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 14px;
+      border-radius: var(--r); padding: 12px;
       display: flex; align-items: flex-start;
-      gap: 10px; flex-direction: row-reverse; text-align: right;
+      gap: 9px; flex-direction: row-reverse; text-align: right;
     }
     .feature-icon {
-      width: 36px; height: 36px; border-radius: 10px;
+      width: 32px; height: 32px; border-radius: 9px;
       background: var(--tint);
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .feature-title { font-size: 13px; font-weight: 800; color: var(--ink); }
-    .feature-sub { font-size: 11px; color: var(--ink-lt); margin-top: 2px; line-height: 1.5; }
+    .feature-title { font-size: 12px; font-weight: 800; color: var(--ink); }
+    .feature-sub { font-size: 10px; color: var(--ink-lt); margin-top: 2px; line-height: 1.5; }
 
     /* ── SOCIAL PROOF ── */
     .social-proof {
       background: var(--tint); border: 1px dashed var(--gold);
-      border-radius: 14px; padding: 10px 14px;
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 20px; flex-direction: row-reverse;
+      border-radius: 12px; padding: 10px 14px;
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 18px; flex-direction: row-reverse;
     }
-    .avatar-stack { display: flex; padding-left: 10px; }
-    .avatar { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--white); overflow: hidden; margin-left: -10px; }
+    .avatar-stack { display: flex; padding-left: 8px; }
+    .avatar { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--white); overflow: hidden; margin-left: -8px; }
     .avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .sp-text { font-size: 13px; font-weight: 800; color: var(--ink); text-align: right; }
-    .sp-sub  { font-size: 11px; color: var(--ink-lt); text-align: right; }
+    .sp-text { font-size: 12px; font-weight: 800; color: var(--ink); text-align: right; }
 
     /* ── ORDER FORM ── */
     .order-form {
       background: var(--white); border: 1.5px solid var(--gold);
-      border-radius: 20px; padding: 22px 18px 20px;
+      border-radius: 20px; padding: 20px 16px 18px;
       box-shadow: var(--shadow); margin-bottom: 28px;
     }
-    .form-title { text-align: center; font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-    .form-sub { text-align: center; font-size: 13px; color: var(--ink-lt); margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
-    .field-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+    .form-title { text-align: center; font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+    .form-sub { text-align: center; font-size: 12px; color: var(--ink-lt); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px dashed var(--border); }
+    .field-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
     .field-wrap { position: relative; }
-    .field-wrap label { display: block; font-size: 11px; font-weight: 800; color: var(--gold-dk); margin-bottom: 5px; text-align: right; }
+    .field-wrap label { display: block; font-size: 11px; font-weight: 800; color: var(--gold-dk); margin-bottom: 4px; text-align: right; }
     .field-wrap input {
       width: 100%; border: 1.5px solid rgba(196,146,42,.3);
-      border-radius: 12px; padding: 12px 14px;
+      border-radius: 11px; padding: 11px 13px;
       font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 500; color: var(--ink);
       background: var(--pale); outline: none;
       transition: border-color .2s, background .2s, box-shadow .2s;
@@ -409,18 +463,18 @@
 
     .order-summary {
       background: var(--pale); border: 1px dashed var(--border);
-      border-radius: 12px; padding: 12px 14px; margin-bottom: 18px;
+      border-radius: 11px; padding: 11px 13px; margin-bottom: 16px;
     }
-    .order-summary-title { font-size: 11px; font-weight: 800; color: var(--gold-dk); margin-bottom: 10px; text-align: right; }
-    .summary-line { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-mid); margin-bottom: 4px; flex-direction: row-reverse; }
-    .summary-line.total { font-weight: 800; font-size: 15px; color: var(--ink); border-top: 1px solid var(--border); padding-top: 8px; margin-top: 6px; }
-    .summary-perfs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; justify-content: flex-end; }
-    .summary-perf-tag { font-size: 11px; background: rgba(196,146,42,.12); color: var(--gold-dk); border-radius: 6px; padding: 2px 8px; font-weight: 600; }
+    .order-summary-title { font-size: 11px; font-weight: 800; color: var(--gold-dk); margin-bottom: 9px; text-align: right; }
+    .summary-line { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-mid); margin-bottom: 4px; flex-direction: row-reverse; }
+    .summary-line.total { font-weight: 800; font-size: 14px; color: var(--ink); border-top: 1px solid var(--border); padding-top: 7px; margin-top: 5px; }
+    .summary-perfs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; justify-content: flex-end; }
+    .summary-perf-tag { font-size: 11px; background: rgba(196,146,42,.12); color: var(--gold-dk); border-radius: 6px; padding: 2px 7px; font-weight: 600; }
 
     .buy-btn {
       width: 100%; background: var(--grad); color: var(--white); border: none;
-      border-radius: 14px; padding: 17px 24px;
-      font-family: 'Cairo', sans-serif; font-size: 17px; font-weight: 800;
+      border-radius: 14px; padding: 16px 20px;
+      font-family: 'Cairo', sans-serif; font-size: 16px; font-weight: 800;
       cursor: pointer; position: relative; overflow: hidden;
       transition: opacity .2s, transform .15s;
       box-shadow: 0 8px 24px rgba(160,120,24,.3);
@@ -432,26 +486,26 @@
 
     .cod-badge {
       display: flex; align-items: center; justify-content: center;
-      gap: 8px; margin-top: 12px; padding: 9px 14px;
+      gap: 8px; margin-top: 11px; padding: 8px 12px;
       background: var(--pale); border-radius: 10px;
       border: 1px dashed var(--border);
-      font-size: 13px; font-weight: 700; color: var(--gold-dk);
+      font-size: 12px; font-weight: 700; color: var(--gold-dk);
     }
 
     /* ── FOOTER ── */
-    footer { background: var(--ink); color: rgba(255,255,255,.7); padding: 32px 20px 24px; text-align: center; margin-top: 40px; }
-    footer .brand { font-size: 26px; font-weight: 700; color: var(--gold-lt); margin-bottom: 6px; }
-    footer p { font-size: 13px; margin-bottom: 20px; }
-    .footer-contact { display: flex; flex-direction: column; gap: 10px; max-width: 320px; margin: 0 auto 20px; }
+    footer { background: var(--ink); color: rgba(255,255,255,.7); padding: 28px 20px 22px; text-align: center; margin-top: 36px; }
+    footer .brand { font-size: 24px; font-weight: 700; color: var(--gold-lt); margin-bottom: 5px; }
+    footer p { font-size: 12px; margin-bottom: 18px; }
+    .footer-contact { display: flex; flex-direction: column; gap: 9px; max-width: 300px; margin: 0 auto 18px; }
     .footer-link {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 12px 14px; background: rgba(255,255,255,.07);
-      border-radius: 12px; color: var(--white);
-      text-decoration: none; font-size: 14px; font-weight: 600;
-      transition: background .2s; text-align: center;
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 11px 12px; background: rgba(255,255,255,.07);
+      border-radius: 11px; color: var(--white);
+      text-decoration: none; font-size: 13px; font-weight: 600;
+      transition: background .2s;
     }
     .footer-link:hover { background: rgba(255,255,255,.13); }
-    .footer-copy { font-size: 12px; opacity: .5; border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px; margin-top: 10px; }
+    .footer-copy { font-size: 11px; opacity: .5; border-top: 1px solid rgba(255,255,255,.1); padding-top: 18px; margin-top: 8px; }
 
     /* ── MODAL ── */
     .modal-overlay {
@@ -462,33 +516,28 @@
     }
     .modal-overlay.open { opacity: 1; pointer-events: auto; }
     .modal-box {
-      background: var(--white); border-radius: 24px;
-      padding: 36px 24px; max-width: 360px; width: 100%;
+      background: var(--white); border-radius: 22px;
+      padding: 32px 22px; max-width: 340px; width: 100%;
       text-align: center; transform: translateY(20px);
       transition: transform .4s cubic-bezier(.25,1,.5,1);
     }
     .modal-overlay.open .modal-box { transform: translateY(0); }
-    .modal-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--tint); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-    .modal-title { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-    .modal-text { font-size: 14px; color: var(--ink-mid); line-height: 1.8; margin-bottom: 24px; }
-    .modal-close { width: 100%; background: var(--grad); color: var(--white); border: none; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; font-family: 'Cairo', sans-serif; }
+    .modal-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--tint); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .modal-title { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .modal-text { font-size: 13px; color: var(--ink-mid); line-height: 1.8; margin-bottom: 22px; }
+    .modal-close { width: 100%; background: var(--grad); color: var(--white); border: none; padding: 13px; border-radius: 11px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: 'Cairo', sans-serif; }
 
     /* ── TOAST ── */
     .toast {
-      position: fixed; bottom: 28px; left: 50%;
+      position: fixed; bottom: 24px; left: 50%;
       transform: translateX(-50%) translateY(80px);
       background: var(--ink); color: var(--white);
-      padding: 12px 24px; border-radius: 12px;
-      font-size: 13px; font-weight: 600; z-index: 9999;
+      padding: 11px 22px; border-radius: 11px;
+      font-size: 12px; font-weight: 600; z-index: 9999;
       transition: transform .35s cubic-bezier(.25,1,.5,1);
       white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,.25);
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
-
-    @media (max-width: 380px) {
-      .pack-name { font-size: 14px; }
-      .perfume-grid { gap: 8px; }
-    }
   </style>
 <base target="_blank">
 </head>
@@ -516,21 +565,13 @@
   <section class="product-info">
     <p class="eyebrow">إصدار حصري</p>
     <h1 class="display product-title">طقم عطور<br/>على مقاسك</h1>
-    <!-- <div class="stars-row">
-      <span class="stars">★★★★★</span>
-      <span class="rating-text">4.9 · أكثر من 3200 عميل راضٍ</span>
-    </div> -->
     <div class="trust-pills">
       <span class="trust-pill">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         توصيل مجاني
       </span>
-      <!-- <span class="trust-pill">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        100% أصلي
-      </span> -->
       <span class="trust-pill">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
         دفع عند الاستلام
       </span>
     </div>
@@ -543,7 +584,6 @@
       </div>
       <div>
         <div class="sp-text">+3200 طقم تم إنشاؤه هذا الشهر</div>
-        <!-- <div class="sp-sub">كل عميل يختار مزيجه الخاص ✨</div> -->
       </div>
     </div>
     <div class="divider"></div>
@@ -554,54 +594,87 @@
     <p class="section-title">الخطوة 1 — اختر طقمك</p>
     <div class="pack-grid">
 
+      <!-- PACK A -->
       <div class="pack-card selected" data-pack="A" onclick="selectPack('A')">
         <div class="pack-badge">الأكثر مبيعاً 🔥</div>
         <div class="pack-radio"></div>
-        <div class="pack-top">
-          <div>
-            <div class="pack-name">طقم الاكتشاف — 3 × 55مل</div>
-            <div class="pack-sub">زجاجات 55مل · 3 عطور باختيارك</div>
+        <div class="pack-inner">
+          <div class="pack-img-col">
+            <!-- صورة الطقم A — الملف: assets/pack-a.jpg -->
+            <img src="images/slides/1.jpeg" alt="طقم الاكتشاف"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="pack-img-placeholder" style="display:none">🧴</div>
           </div>
-          <div class="pack-price">
-            <span class="pack-price-now">200 درهم</span>
-            <span class="pack-price-old">350 درهم</span>
-            <span class="pack-price-save">توفير 43%</span>
+          <div class="pack-text-col">
+            <div class="pack-type-pill">3 × 55مل</div>
+            <div class="pack-name">طقم الاكتشاف</div>
+            <div class="pack-sub">3 عطور باختيارك · زجاجات 55مل</div>
+            <div class="pack-price-row">
+              <span class="pack-price-now">200 درهم</span>
+              <span class="pack-price-old">350 د</span>
+              <span class="pack-price-save">43%−</span>
+            </div>
           </div>
         </div>
-        <div class="pack-dots" id="pack-dots-A"></div>
+        <div class="pack-dots-row">
+          <span class="pack-dots-label">فتحات متاحة:</span>
+          <div id="pack-dots-A"></div>
+        </div>
       </div>
 
+      <!-- PACK B -->
       <div class="pack-card" data-pack="B" onclick="selectPack('B')">
         <div class="pack-badge">أفضل قيمة 💫</div>
         <div class="pack-radio"></div>
-        <div class="pack-top">
-          <div>
-            <div class="pack-name">الطقم الأساسي — 5 × 30مل</div>
-            <div class="pack-sub">زجاجات 30مل · 5 عطور باختيارك</div>
+        <div class="pack-inner">
+          <div class="pack-img-col">
+            <!-- صورة الطقم B — الملف: assets/pack-b.jpg -->
+            <img src="images/slides/5.jpeg" alt="الطقم الأساسي"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="pack-img-placeholder" style="display:none">🧴</div>
           </div>
-          <div class="pack-price">
-            <span class="pack-price-now">180 درهم</span>
-            <span class="pack-price-old">320 درهم</span>
-            <span class="pack-price-save">توفير 44%</span>
+          <div class="pack-text-col">
+            <div class="pack-type-pill">5 × 30مل</div>
+            <div class="pack-name">الطقم الأساسي</div>
+            <div class="pack-sub">5 عطور باختيارك · زجاجات 30مل</div>
+            <div class="pack-price-row">
+              <span class="pack-price-now">180 درهم</span>
+              <span class="pack-price-old">320 د</span>
+              <span class="pack-price-save">44%−</span>
+            </div>
           </div>
         </div>
-        <div class="pack-dots" id="pack-dots-B"></div>
+        <div class="pack-dots-row">
+          <span class="pack-dots-label">فتحات متاحة:</span>
+          <div id="pack-dots-B"></div>
+        </div>
       </div>
 
+      <!-- PACK C -->
       <div class="pack-card" data-pack="C" onclick="selectPack('C')">
         <div class="pack-radio"></div>
-        <div class="pack-top">
-          <div>
-            <div class="pack-name">طقم البريستيج — 4 × 30مل</div>
-            <div class="pack-sub">زجاجات 30مل · 4 عطور باختيارك</div>
+        <div class="pack-inner">
+          <div class="pack-img-col">
+            <!-- صورة الطقم C — الملف: assets/pack-c.jpg -->
+            <img src="images/slides/4.jpeg" alt="طقم البريستيج"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="pack-img-placeholder" style="display:none">🧴</div>
           </div>
-          <div class="pack-price">
-            <span class="pack-price-now">200 درهم</span>
-            <span class="pack-price-old">360 درهم</span>
-            <span class="pack-price-save">توفير 44%</span>
+          <div class="pack-text-col">
+            <div class="pack-type-pill">4 × 30مل</div>
+            <div class="pack-name">طقم البريستيج</div>
+            <div class="pack-sub">4 عطور باختيارك · زجاجات 30مل</div>
+            <div class="pack-price-row">
+              <span class="pack-price-now">200 درهم</span>
+              <span class="pack-price-old">360 د</span>
+              <span class="pack-price-save">44%−</span>
+            </div>
           </div>
         </div>
-        <div class="pack-dots" id="pack-dots-C"></div>
+        <div class="pack-dots-row">
+          <span class="pack-dots-label">فتحات متاحة:</span>
+          <div id="pack-dots-C"></div>
+        </div>
       </div>
 
     </div>
@@ -627,25 +700,25 @@
   </div>
 
   <div class="countdown-bar">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    <span>اطلب خلال <strong id="countdown">08:00:00</strong> للحصول على توصيل ذو أولوية</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <span>اطلب خلال <strong id="countdown">08:00:00</strong> للتوصيل ذو أولوية</span>
   </div>
 
   <div class="features-grid">
     <div class="feature-card">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       <div><div class="feature-title">توصيل مجاني</div><div class="feature-sub">في جميع أنحاء المغرب</div></div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div><div class="feature-title">الدفع عند الاستلام</div><div class="feature-sub">بدون بطاقة بنكية</div></div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
       <div><div class="feature-title">100% أصلي</div><div class="feature-sub">مضمون ومعتمد</div></div>
     </div>
     <div class="feature-card">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16a2 2 0 0 1 .42.92z"/></svg></div>
+      <div class="feature-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16a2 2 0 0 1 .42.92z"/></svg></div>
       <div><div class="feature-title">دعم 24/7</div><div class="feature-sub">عبر واتساب</div></div>
     </div>
   </div>
@@ -683,7 +756,7 @@
       </div>
       <button class="buy-btn" id="buy-btn">✨ اطلب الآن — الدفع عند الاستلام</button>
       <div class="cod-badge">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         لا حاجة لبطاقة بنكية — ادفع عند استلام طلبك
       </div>
     </div>
@@ -695,12 +768,12 @@
   <div class="brand">YSF_PARFUMS®</div>
   <p>عطور أصيلة لكل لحظة مميزة</p>
   <div class="footer-contact">
-    <a class="footer-link" href="https://wa.me/212600000000" target="_blank" rel="noopener">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <a class="footer-link" href="https://wa.me/212606076419" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       تواصل معنا عبر واتساب
     </a>
-    <a class="footer-link" href="https://www.instagram.com/ysf_parfums" target="_blank" rel="noopener">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="white"/></svg>
+    <a class="footer-link" href="https://www.instagram.com/youssef_parfumerie?igsh=MXh5bnl3M3RpZXlwcQ%3D%3D&utm_source=qr" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="white"/></svg>
       تابعنا على إنستغرام
     </a>
   </div>
@@ -710,7 +783,7 @@
 <div class="modal-overlay" id="success-modal">
   <div class="modal-box">
     <div class="modal-icon">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
     <div class="modal-title">تم استلام طلبك! 🎉</div>
     <div class="modal-text" id="modal-text">شكراً لك! تم تسجيل طقمك. سيتواصل معك فريقنا قريباً لتأكيد التوصيل.</div>
@@ -759,7 +832,6 @@
   };
 
   let currentPack = 'A';
-  // Each entry: { id, name, img, custom } or null
   let selections  = [];
   let openSlotIdx = -1;
 
@@ -798,10 +870,11 @@
       var el = document.getElementById('pack-dots-' + key);
       if (!el) return;
       el.innerHTML = '';
+      el.style.cssText = 'display:flex;gap:4px;flex-wrap:wrap;';
       for (var i = 0; i < PACKS[key].count; i++) {
         var dot = document.createElement('div');
         dot.className = 'pack-dot';
-        dot.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>';
+        dot.innerHTML = '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>';
         el.appendChild(dot);
       }
     });
@@ -833,37 +906,33 @@
     for (var i = 0; i < pack.count; i++) {
       (function(idx) {
         var isLast = (idx === pack.count - 1);
-
         var slot = document.createElement('div');
         slot.className = 'picker-slot';
         slot.id = 'slot-' + idx;
 
-        /* ── HEADER ── */
         var header = document.createElement('div');
         header.className = 'slot-header';
         header.innerHTML =
           '<div class="slot-num" id="slot-num-' + idx + '">' + (idx + 1) + '</div>' +
           '<div class="slot-plus-btn" id="slot-icon-' + idx + '">' +
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>' +
           '</div>' +
           '<div class="slot-info">' +
             '<div class="slot-name" id="slot-name-' + idx + '">انقر لاختيار العطر</div>' +
             '<div class="slot-sub">' + pack.vol + ' · الفتحة ' + (idx + 1) + '</div>' +
           '</div>' +
           '<span class="slot-badge" id="slot-badge-' + idx + '">اختر</span>' +
-          '<svg class="slot-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>';
+          '<svg class="slot-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>';
 
         header.addEventListener('click', function() {
           if (openSlotIdx === idx) { closeAllSlots(); } else { openSlot(idx); }
         });
 
-        /* ── PANEL ── */
         var panel = document.createElement('div');
         panel.className = 'slot-panel';
         var inner = document.createElement('div');
         inner.className = 'slot-panel-inner';
 
-        /* Perfume grid */
         var grid = document.createElement('div');
         grid.className = 'perfume-grid';
         grid.id = 'grid-' + idx;
@@ -879,20 +948,17 @@
             '<div class="perfume-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>';
 
           card.addEventListener('click', function() {
-            /* 1. Clear custom input & reset its container */
             var ci = document.getElementById('custom-input-' + idx);
             var cw = document.getElementById('custom-wrap-' + idx);
             var cb = document.getElementById('custom-btn-' + idx);
             if (ci) ci.value = '';
-            if (cw) { cw.classList.remove('confirmed'); }
+            if (cw) cw.classList.remove('confirmed');
             if (cb) { cb.textContent = 'تأكيد'; cb.classList.remove('confirmed-btn'); }
 
-            /* 2. Highlight the selected card */
             grid.querySelectorAll('.perfume-card').forEach(function(c) {
               c.classList.toggle('selected', c.dataset.pid === p.id);
             });
 
-            /* 3. Save selection and turn slot GREEN immediately */
             var sel = { id: p.id, name: p.name, img: p.img, custom: false };
             selections[idx] = sel;
             markSlotDone(idx, sel);
@@ -900,42 +966,32 @@
             updateProgress();
             updateSummary();
           });
-
           grid.appendChild(card);
         });
 
         inner.appendChild(grid);
 
-        /* Custom perfume input */
         var customWrap = document.createElement('div');
         customWrap.className = 'custom-perfume-wrap';
         customWrap.id = 'custom-wrap-' + idx;
         customWrap.innerHTML =
-          '<label class="custom-perfume-label">🔍 عطرك غير موجود في القائمة؟ اكتب اسمه هنا:</label>' +
+          '<label class="custom-perfume-label">🔍 عطرك غير موجود؟ اكتب اسمه هنا:</label>' +
           '<div class="custom-perfume-row">' +
             '<input class="custom-perfume-input" id="custom-input-' + idx + '" type="text" placeholder="مثال: Bleu de Chanel ..." />' +
             '<button class="custom-perfume-btn" id="custom-btn-' + idx + '">تأكيد</button>' +
           '</div>';
         inner.appendChild(customWrap);
 
-        /* Wire custom confirm button */
         customWrap.querySelector('#custom-btn-' + idx).addEventListener('click', function() {
           var inputEl = document.getElementById('custom-input-' + idx);
           var val = inputEl.value.trim();
           if (!val) { showToast('يرجى كتابة اسم العطر أولاً', '#a07818'); return; }
-
-          /* Deselect any list card */
           var g = document.getElementById('grid-' + idx);
           g.querySelectorAll('.perfume-card').forEach(function(c) { c.classList.remove('selected'); });
-
-          /* Mark custom container green */
           var cw = document.getElementById('custom-wrap-' + idx);
           var cb = document.getElementById('custom-btn-' + idx);
           cw.classList.add('confirmed');
-          cb.textContent = '✓ تم';
-          cb.classList.add('confirmed-btn');
-
-          /* Save and apply green to slot */
+          cb.textContent = '✓ تم'; cb.classList.add('confirmed-btn');
           var sel = { id: 'custom_' + idx, name: val, img: null, custom: true };
           selections[idx] = sel;
           markSlotDone(idx, sel);
@@ -944,12 +1000,10 @@
           updateSummary();
         });
 
-        /* When client types in custom box → clear list selection */
         customWrap.querySelector('#custom-input-' + idx).addEventListener('input', function() {
           if (this.value.trim()) {
             var g = document.getElementById('grid-' + idx);
             g.querySelectorAll('.perfume-card').forEach(function(c) { c.classList.remove('selected'); });
-            /* Reset slot if it was marked done via list */
             if (selections[idx] && !selections[idx].custom) {
               selections[idx] = null;
               resetSlotAppearance(idx);
@@ -960,7 +1014,6 @@
           }
         });
 
-        /* Next button */
         var nextWrap = document.createElement('div');
         nextWrap.className = 'slot-next-wrap';
         var nextBtn = document.createElement('button');
@@ -969,7 +1022,7 @@
         nextBtn.disabled = true;
         nextBtn.innerHTML = isLast
           ? 'إتمام الاختيار ✓'
-          : 'التالي — العطر ' + (idx + 2) + ' <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+          : 'التالي — العطر ' + (idx + 2) + ' <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
 
         nextBtn.addEventListener('click', function() {
           if (isLast) {
@@ -984,7 +1037,6 @@
 
         nextWrap.appendChild(nextBtn);
         inner.appendChild(nextWrap);
-
         panel.appendChild(inner);
         slot.appendChild(header);
         slot.appendChild(panel);
@@ -993,86 +1045,39 @@
     }
   }
 
-  /* ── Enable Next button ── */
   function updateNextBtn(idx) {
     var btn = document.getElementById('slot-next-' + idx);
     if (btn) btn.disabled = false;
   }
 
-  /* ── Mark slot header as DONE (green) — called for BOTH list and custom ── */
   function markSlotDone(slotIdx, sel) {
-    /* Badge */
     var badge = document.getElementById('slot-badge-' + slotIdx);
     if (badge) { badge.textContent = '✓ تم'; badge.classList.add('done'); }
-
-    /* Slot name */
     var nameEl = document.getElementById('slot-name-' + slotIdx);
     if (nameEl) nameEl.textContent = sel.name;
 
-    /* Icon — replace plus with image preview or emoji */
-    var iconEl = document.getElementById('slot-icon-' + slotIdx);
-    if (iconEl && iconEl.classList.contains('slot-plus-btn')) {
-      /* Only replace the first time (still a plus-btn) */
-      if (sel.img) {
-        var previewImg = document.createElement('img');
-        previewImg.className = 'slot-preview';
-        previewImg.src = sel.img;
-        previewImg.alt = sel.name;
-        previewImg.onerror = function() { this.style.background = 'var(--tint)'; this.src = ''; };
-        iconEl.replaceWith(previewImg);
-      } else {
-        var placeholder = document.createElement('div');
-        placeholder.className = 'slot-plus-btn';
-        placeholder.style.background = 'rgba(22,163,74,.15)';
-        placeholder.style.borderColor = 'var(--green)';
-        placeholder.innerHTML = '<span style="font-size:22px">✏️</span>';
-        iconEl.replaceWith(placeholder);
-      }
-    } else if (iconEl) {
-      /* Already replaced — update if switching from custom to list or vice versa */
-      if (sel.img) {
-        var img2 = document.createElement('img');
-        img2.className = 'slot-preview';
-        img2.src = sel.img; img2.alt = sel.name;
-        img2.onerror = function() { this.style.background = 'var(--tint)'; this.src = ''; };
-        iconEl.replaceWith(img2);
-      } else {
-        var ph2 = document.createElement('div');
-        ph2.className = 'slot-plus-btn';
-        ph2.style.background = 'rgba(22,163,74,.15)';
-        ph2.style.borderColor = 'var(--green)';
-        ph2.innerHTML = '<span style="font-size:22px">✏️</span>';
-        iconEl.replaceWith(ph2);
-      }
-    } else {
-      /* Was already replaced by img or another div — find it by querying the header */
-      var header = document.querySelector('#slot-' + slotIdx + ' .slot-header');
-      if (header) {
-        var existing = header.querySelector('.slot-preview, .slot-plus-btn');
-        if (existing) {
-          if (sel.img) {
-            var img3 = document.createElement('img');
-            img3.className = 'slot-preview'; img3.src = sel.img; img3.alt = sel.name;
-            img3.onerror = function() { this.style.background = 'var(--tint)'; this.src = ''; };
-            existing.replaceWith(img3);
-          } else {
-            var ph3 = document.createElement('div');
-            ph3.className = 'slot-plus-btn';
-            ph3.style.background = 'rgba(22,163,74,.15)';
-            ph3.style.borderColor = 'var(--green)';
-            ph3.innerHTML = '<span style="font-size:22px">✏️</span>';
-            existing.replaceWith(ph3);
-          }
+    var header = document.querySelector('#slot-' + slotIdx + ' .slot-header');
+    if (header) {
+      var existing = header.querySelector('.slot-preview, .slot-plus-btn');
+      if (existing) {
+        if (sel.img) {
+          var img = document.createElement('img');
+          img.className = 'slot-preview'; img.src = sel.img; img.alt = sel.name;
+          img.onerror = function() { this.style.background = 'var(--tint)'; this.src = ''; };
+          existing.replaceWith(img);
+        } else {
+          var ph = document.createElement('div');
+          ph.className = 'slot-plus-btn';
+          ph.style.cssText = 'background:rgba(22,163,74,.15);border-color:var(--green)';
+          ph.innerHTML = '<span style="font-size:20px">✏️</span>';
+          existing.replaceWith(ph);
         }
       }
     }
-
-    /* Slot container — add filled class → turns green via CSS */
     var slotEl = document.getElementById('slot-' + slotIdx);
     if (slotEl) slotEl.classList.add('filled');
   }
 
-  /* ── Reset slot appearance (when user types in custom and had a list selection) ── */
   function resetSlotAppearance(idx) {
     var badge = document.getElementById('slot-badge-' + idx);
     if (badge) { badge.textContent = 'اختر'; badge.classList.remove('done'); }
@@ -1080,7 +1085,6 @@
     if (nameEl) nameEl.textContent = 'انقر لاختيار العطر';
     var slotEl = document.getElementById('slot-' + idx);
     if (slotEl) slotEl.classList.remove('filled');
-    /* Restore plus icon */
     var header = document.querySelector('#slot-' + idx + ' .slot-header');
     if (header) {
       var existing = header.querySelector('.slot-preview, .slot-plus-btn');
@@ -1088,23 +1092,19 @@
         var plus = document.createElement('div');
         plus.className = 'slot-plus-btn';
         plus.id = 'slot-icon-' + idx;
-        plus.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>';
+        plus.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dk)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>';
         existing.replaceWith(plus);
       }
     }
   }
 
-  /* ── Open a slot ── */
   function openSlot(idx) {
-    var pack = PACKS[currentPack];
     closeAllSlots();
     openSlotIdx = idx;
     var target = document.getElementById('slot-' + idx);
     if (target) {
       target.classList.add('open');
-      setTimeout(function() {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 80);
+      setTimeout(function() { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80);
     }
   }
 
@@ -1113,7 +1113,6 @@
     openSlotIdx = -1;
   }
 
-  /* ══ PROGRESS ══ */
   function updateProgress() {
     var pack   = PACKS[currentPack];
     var filled = selections.filter(Boolean).length;
@@ -1122,7 +1121,6 @@
     document.getElementById('prog-total').textContent = '/ ' + pack.count;
   }
 
-  /* ══ SUMMARY ══ */
   function updateSummary() {
     var pack = PACKS[currentPack];
     document.getElementById('sum-pack').textContent  = pack.name;
@@ -1145,14 +1143,12 @@
     var t  = 8 * 3600;
     setInterval(function() {
       t = t > 0 ? t - 1 : 8 * 3600;
-      var h = Math.floor(t / 3600);
-      var m = Math.floor((t % 3600) / 60);
-      var s = t % 60;
+      var h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), s = t % 60;
       el.textContent = [h, m, s].map(function(n) { return String(n).padStart(2, '0'); }).join(':');
     }, 1000);
   })();
 
-  /* ══ FORM VALIDATION ══ */
+  /* ══ VALIDATION ══ */
   function showErr(input, msg) {
     clearErr(input);
     input.style.borderColor = '#dc2626';
@@ -1199,7 +1195,7 @@
     return true;
   }
 
-  /* ══ ORDER SUBMIT ══ */
+  /* ══ SUBMIT ══ */
   document.getElementById('buy-btn').addEventListener('click', async function() {
     if (!validateSel()) return;
     if (!validate()) {
@@ -1227,10 +1223,8 @@
       status:     'طلب جديد',
     };
 
-    var btn  = this;
-    var orig = btn.innerHTML;
-    btn.disabled = true;
-    btn.textContent = 'جارٍ المعالجة…';
+    var btn = this, orig = btn.innerHTML;
+    btn.disabled = true; btn.textContent = 'جارٍ المعالجة…';
 
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
@@ -1243,23 +1237,20 @@
         'شكراً <strong>' + payload.nom + '</strong>! تم تسجيل طقمك<br/>' +
         '<em>' + pack.name + '</em> بنجاح.<br/>' +
         'العطور: <strong>' + perfumeNames.join('، ') + '</strong><br/>' +
-        'سيتواصل معك فريقنا قريباً لتأكيد التوصيل. 🎉';
+        'سيتواصل معك فريقنا قريباً. 🎉';
       openModal();
 
       ['f-name','f-address','f-city','f-phone'].forEach(function(id) {
         var el = document.getElementById(id);
         if (el) el.value = '';
       });
-
     } catch(err) {
       showToast('خطأ في الاتصال. حاول مرة أخرى.', '#dc2626');
     } finally {
-      btn.disabled = false;
-      btn.innerHTML = orig;
+      btn.disabled = false; btn.innerHTML = orig;
     }
   });
 
-  /* ══ MODAL ══ */
   function openModal() {
     document.getElementById('success-modal').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1268,24 +1259,18 @@
     document.getElementById('success-modal').classList.remove('open');
     document.body.style.overflow = '';
   };
-  document.getElementById('success-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
+  document.getElementById('success-modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
 
-  /* ══ TOAST ══ */
   function showToast(msg, bg) {
     var t = document.getElementById('toast');
-    t.textContent = msg;
-    t.style.background = bg || '#1a1208';
+    t.textContent = msg; t.style.background = bg || '#1a1208';
     t.classList.add('show');
     setTimeout(function() { t.classList.remove('show'); }, 3500);
   }
 
-  /* ══ INIT ══ */
   buildPackDots();
   selectPack('A');
-
 })();
 </script>
 </body>
